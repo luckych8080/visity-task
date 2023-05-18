@@ -1,31 +1,32 @@
-import axios from "axios";
 import Item from "./Item";
-import { useEffect, useState } from "react";
-
-const baseURL = "http://localhost:8080/";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAsync } from "../redux/itemSlice";
 
 const ItemList = () => {
-  const [items, setItems] = useState([]);
+  const dispatch = useDispatch();
+  const items = useSelector((state) => state.item.items);
 
   useEffect(() => {
-    axios.get(baseURL).then((res) => {
-      setItems(res.data.Items);
-    });
-  }, []);
+    dispatch(fetchAsync());
+  }, [dispatch]);
 
   return (
     <>
       <div className="flex flex-row border-b border-gray-300 py-2">
-        <h1 className="w-1/3 font-bold">Name</h1>
-        <h1 className="w-1/3 font-bold">Email</h1>
-        <h1 className="w-1/3 font-bold">Mobile</h1>
+        <h1 className="w-1/3 font-bold text-center">Name</h1>
+        <h1 className="w-1/3 font-bold text-center">Email</h1>
+        <h1 className="w-1/3 font-bold text-center">Mobile</h1>
+        {/* <h1 className="w-1/3 font-bold text-center">Edit</h1>
+        <h1 className="w-1/3 font-bold text-center">Delete</h1> */}
       </div>
-      {items.map((item) => (
+      {items.map((i) => (
         <Item
-          key={item._id}
-          name={item.name}
-          email={item.email}
-          mobile={item.mobile}
+          key={i._id}
+          id={i._id}
+          name={i.name}
+          email={i.email}
+          mobile={i.mobile}
         />
       ))}
     </>

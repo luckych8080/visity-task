@@ -1,16 +1,18 @@
 const { Router } = require("express");
 const {
-  getItem,
+  getItems,
   createItem,
   updateItem,
   deleteItem,
+  getItem,
 } = require("../controllers/item");
 
 const router = Router();
 
 router
-  .get("/", getItem)
+  .get("/", getItems)
   .post("/", createItem)
+  .get("/:id", getItem)
   .put("/:id", updateItem)
   .delete("/:id", deleteItem);
 

@@ -1,9 +1,18 @@
 const Item = require("../models/item");
 
-const getItem = async (req, res) => {
+const getItems = async (req, res) => {
   try {
     const Items = await Item.find();
     res.status(200).json({ Items });
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getItem = async (req, res) => {
+  try {
+    const I = await Item.findById(req.params.id);
+    res.status(200).json({ I });
   } catch (error) {
     throw error;
   }
@@ -43,4 +52,4 @@ const deleteItem = async (req, res) => {
   }
 };
 
-module.exports = { getItem, createItem, updateItem, deleteItem };
+module.exports = { getItems, getItem, createItem, updateItem, deleteItem };

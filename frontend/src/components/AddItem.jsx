@@ -1,23 +1,16 @@
 import { useState } from "react";
-import axios from "axios";
-
-const baseURL = "http://localhost:8080/";
+import { addAsync, updateAsync } from "../redux/itemSlice";
+import { useDispatch } from "react-redux";
 
 const AddItem = () => {
+  const dispatch = useDispatch();
+
   const [item, setItem] = useState({});
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    if (item.name) {
-      axios
-        .post(baseURL, {
-          ...item,
-        })
-        .then((res) => {
-          //   setItems({});
-        });
-    }
-  }
+    dispatch(addAsync(item));
+  };
 
   function handleChange(e) {
     e.stopPropagation();
@@ -25,7 +18,7 @@ const AddItem = () => {
   }
 
   return (
-    <form>
+    <form className="max-w-sm mx-auto">
       <input
         type="text"
         name="name"
@@ -33,6 +26,7 @@ const AddItem = () => {
         onChange={handleChange}
         value={item.name}
         maxLength={5}
+        className="w-full mb-4 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
       />
       <input
         type="text"
@@ -40,6 +34,7 @@ const AddItem = () => {
         placeholder="enter email address"
         onChange={handleChange}
         value={item.email}
+        className="w-full mb-4 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
       />
       <input
         type="text"
@@ -47,8 +42,15 @@ const AddItem = () => {
         placeholder="Enter your mobile number"
         onChange={handleChange}
         value={item.mobile}
+        maxLength={10}
+        className="w-full mb-4 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
       />
-      <button onClick={handleSubmit}>Add</button>
+      <button
+        className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        onClick={handleSubmit}
+      >
+        Add
+      </button>
     </form>
   );
 };
