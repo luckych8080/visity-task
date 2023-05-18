@@ -1,4 +1,4 @@
 
 # Todo
-- need to use redux thunk to get things
 
+u can edit the input by clicking on them

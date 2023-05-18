@@ -19,8 +19,8 @@ export const addAsync = createAsyncThunk("item/addItem", async (item) => {
 
 export const updateAsync = createAsyncThunk(
   "items/updateItem",
-  async ({ id, itemUpdate }) => {
-    const response = await updateItem(id, itemUpdate);
+  async ({ id, item }) => {
+    const response = await updateItem(id, item);
     return response.data;
   }
 );
@@ -45,12 +45,10 @@ export const itemsSlice = createSlice({
       })
       .addCase(addAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        console.log(action.payload.item);
         state.items.push(action.payload.item);
       })
       .addCase(deleteAsync.fulfilled, (state, action) => {
         state.status = "idle";
-
         const index = state.items.findIndex(
           (item) => item._id === action.payload
         );

@@ -13,7 +13,6 @@ const ItemList = () => {
 
   return (
     <>
-      {/* <div className="flex flex-col border-b border-gray-300 py-2"> */}
       <div className="grid grid-cols-6 gap-4">
         <div className="col-span-1  font-bold text-center">Name</div>
         <div className="col-span-2 font-bold text-center">Email</div>
@@ -24,15 +23,13 @@ const ItemList = () => {
 
       {items.map((i) => (
         <Item
-          key={i._id}
+          key={JSON.stringify(i.name + i.email + i.mobile + i._id)}
           id={i._id}
           name={i.name}
           email={i.email}
           mobile={i.mobile}
         />
       ))}
-
-      {/* </div> */}
     </>
   );
 };

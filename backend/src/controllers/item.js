@@ -22,7 +22,7 @@ const createItem = async (req, res) => {
   try {
     const newItem = await Item.create(req.body);
 
-    res.status(201).json({ item: newItem});
+    res.status(201).json({ item: newItem });
   } catch (error) {
     throw error;
   }
@@ -34,9 +34,10 @@ const updateItem = async (req, res) => {
       params: { id },
       body,
     } = req;
-    const updateTodo = await Item.findByIdAndUpdate(id, body);
+    const updateItem = await Item.findByIdAndUpdate(id, body);
 
-    res.status(200).json({ item: updateTodo});
+    const item = await Item.findById(id);
+    res.status(200).json({ item: item });
   } catch (error) {
     throw error;
   }
