@@ -20,9 +20,9 @@ const getItem = async (req, res) => {
 
 const createItem = async (req, res) => {
   try {
-    await Item.create(req.body);
+    const newItem = await Item.create(req.body);
 
-    res.status(201).json({ message: "Item Added" });
+    res.status(201).json({ item: newItem});
   } catch (error) {
     throw error;
   }
@@ -36,7 +36,7 @@ const updateItem = async (req, res) => {
     } = req;
     const updateTodo = await Item.findByIdAndUpdate(id, body);
 
-    res.status(200).json({ message: "Updated Item" });
+    res.status(200).json({ item: updateTodo});
   } catch (error) {
     throw error;
   }

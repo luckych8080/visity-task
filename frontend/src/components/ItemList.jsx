@@ -13,13 +13,15 @@ const ItemList = () => {
 
   return (
     <>
-      <div className="flex flex-row border-b border-gray-300 py-2">
-        <h1 className="w-1/3 font-bold text-center">Name</h1>
-        <h1 className="w-1/3 font-bold text-center">Email</h1>
-        <h1 className="w-1/3 font-bold text-center">Mobile</h1>
-        {/* <h1 className="w-1/3 font-bold text-center">Edit</h1>
-        <h1 className="w-1/3 font-bold text-center">Delete</h1> */}
+      {/* <div className="flex flex-col border-b border-gray-300 py-2"> */}
+      <div className="grid grid-cols-6 gap-4">
+        <div className="col-span-1  font-bold text-center">Name</div>
+        <div className="col-span-2 font-bold text-center">Email</div>
+        <div className="col-span-1 font-bold text-center">Mobile</div>
+        <div className="col-span-1 font-bold text-center">Edit</div>
+        <div className="col-span-1 font-bold text-center">Delete</div>
       </div>
+
       {items.map((i) => (
         <Item
           key={i._id}
@@ -29,6 +31,8 @@ const ItemList = () => {
           mobile={i.mobile}
         />
       ))}
+
+      {/* </div> */}
     </>
   );
 };

@@ -1,26 +1,22 @@
-import { useSelector, useDispatch } from "react-redux";
-import { deleteAsync, updateAsync } from "../redux/itemSlice";
+import { useDispatch } from "react-redux";
+import { deleteAsync } from "../redux/itemSlice";
 
 const Item = ({ id, name, email, mobile }) => {
   const dispatch = useDispatch();
 
-  // const handleChange = (e, id) =>{
-  //   dispatch(updateAsync({id, change:{}}))
-  // }
-
   return (
-    <div className="flex flex-row border-b border-gray-300 py-2">
-      <h1 className="w-1/3  text-lg font-semibold text-center">{name}</h1>
-      <h1 className="w-1/3  text-lg font-semibold text-center">{email}</h1>
-      <h1 className="w-1/3  text-lg font-semibold text-center">{mobile}</h1>
-      <button className="ml-auto mr-2 px-2 py-1 text-sm font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600">
-        ✒️
+    <div className="grid grid-cols-6 gap-1">
+      <div className="col-span-1 bg-gray-200 p-2 rounded-md">{name}</div>
+      <div className="col-span-2 bg-gray-200 p-2 rounded-md">{email}</div>
+      <div className="col-span-1 bg-gray-200 p-2 rounded-md">{mobile}</div>
+      <button className="col-span-1 bg-blue-500 text-white p-2 rounded-md">
+        Edit
       </button>
       <button
-        className="px-2 py-1 text-sm font-semibold text-white bg-red-500 rounded-md hover:bg-red-600"
+        className="col-span-1 bg-red-500 text-white p-2 rounded-md"
         onClick={() => dispatch(deleteAsync(id))}
       >
-        🗑️
+        Delete
       </button>
     </div>
   );

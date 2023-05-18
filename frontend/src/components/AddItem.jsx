@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addAsync, updateAsync } from "../redux/itemSlice";
+import { addAsync } from "../redux/itemSlice";
 import { useDispatch } from "react-redux";
 
 const AddItem = () => {
@@ -10,6 +10,7 @@ const AddItem = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(addAsync(item));
+    setItem({});
   };
 
   function handleChange(e) {
@@ -24,7 +25,7 @@ const AddItem = () => {
         name="name"
         placeholder="Enter name"
         onChange={handleChange}
-        value={item.name}
+        value={item.name || ""}
         maxLength={5}
         className="w-full mb-4 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
       />
@@ -33,7 +34,7 @@ const AddItem = () => {
         name="email"
         placeholder="enter email address"
         onChange={handleChange}
-        value={item.email}
+        value={item.email || ""}
         className="w-full mb-4 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
       />
       <input
@@ -41,7 +42,7 @@ const AddItem = () => {
         name="mobile"
         placeholder="Enter your mobile number"
         onChange={handleChange}
-        value={item.mobile}
+        value={item.mobile || ""}
         maxLength={10}
         className="w-full mb-4 p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
       />

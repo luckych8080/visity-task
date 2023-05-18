@@ -6,7 +6,7 @@ const initialState = {
   status: "idle",
 };
 
-export const fetchAsync = createAsyncThunk("items/fetchItem", async () => {
+export const fetchAsync = createAsyncThunk("items/fetchItems", async () => {
   const response = await fetchItems();
   return response.data.Items;
 });
@@ -45,7 +45,8 @@ export const itemsSlice = createSlice({
       })
       .addCase(addAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.items.push(action.payload);
+        console.log(action.payload.item);
+        state.items.push(action.payload.item);
       })
       .addCase(deleteAsync.fulfilled, (state, action) => {
         state.status = "idle";
@@ -61,7 +62,7 @@ export const itemsSlice = createSlice({
         const index = state.items.findIndex(
           (item) => item._id === action.payload.id
         );
-        state.items.splice(index, 1, action.payload);
+        state.items.splice(index, 1, action.payload.item);
       });
   },
 });
